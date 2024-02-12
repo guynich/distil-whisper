@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-accelerate launch run_pseudo_labelling.py \
+accelerate launch training/run_pseudo_labelling.py \
   --model_name_or_path "openai/whisper-large-v2" \
   --dataset_name "mozilla-foundation/common_voice_13_0" \
   --dataset_config_name "hi" \
