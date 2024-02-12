@@ -12,7 +12,7 @@ accelerate launch training/run_pseudo_labelling.py \
   --per_device_eval_batch_size 64 \
   --dtype "float16" \
   --dataloader_num_workers 16 \
-  --preprocessing_num_workers 16 \
+  --preprocessing_num_workers 1 \
   --logging_steps 500 \
   --max_label_length 128 \
   --report_to "wandb" \
