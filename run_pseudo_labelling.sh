@@ -10,7 +10,7 @@ accelerate launch training/run_pseudo_labelling.py \
   --output_dir "./common_voice_13_0_hi_pseudo_labelled" \
   --wandb_project "distil-whisper-labelling" \
   --per_device_eval_batch_size 64 \
-  --dtype "bfloat16" \
+  --dtype "float16" \
   --dataloader_num_workers 16 \
   --preprocessing_num_workers 16 \
   --logging_steps 500 \
