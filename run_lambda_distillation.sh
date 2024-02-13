@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-accelerate launch run_distillation.py \
+accelerate launch training/run_distillation.py \
   --model_name_or_path "../distil-whisper-large-v2-hi/distil-large-v2-init" \
   --teacher_model_name_or_path "openai/whisper-large-v2" \
   --train_dataset_name "./common_voice_13_0_hi_pseudo_labelled+../common_voice_13_0_hi_pseudo_labelled" \
