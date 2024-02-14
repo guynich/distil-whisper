@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-# Section 1.
-# https://github.com/huggingface/distil-whisper/tree/main/training#1-pseudo-labelling
-
-# Run from `distil-whisper` folder.
-# Creates `common_voice_13_0_hi_pseudo_labelled` folder under `distil-whisper`.
-
 # Changes: mitigate out of memory problems on A10 with 22GB memory.
 #  --per_device_eval_batch_size 64 \
 #  --attn_type "flash_attn" \
