@@ -1,9 +1,17 @@
 #!/usr/bin/env bash
 
+# Stage 3.
+# https://github.com/huggingface/distil-whisper/tree/main/training#3-training
+
+# TODO(user): set up paths to student model and pseudo-labelled dataset.
+
+# Changes.
+# --model_name_or_path "openai/whisper-large-v2" \
+
 accelerate launch training/run_distillation.py \
   --model_name_or_path "../distil-whisper-large-v2-hi/distil-large-v2-init" \
   --teacher_model_name_or_path "openai/whisper-large-v2" \
-  --train_dataset_name "./common_voice_13_0_hi_pseudo_labelled+../common_voice_13_0_hi_pseudo_labelled" \
+  --train_dataset_name "./common_voice_13_0_hi_pseudo_labelled+./common_voice_13_0_hi_pseudo_labelled" \
   --train_dataset_config_name "hi+hi" \
   --train_split_name "train+validation" \
   --text_column_name "sentence+sentence" \
