@@ -14,6 +14,15 @@ Adapted for running on A10 with 22GB RAM.
   - [Training error.](#training-error)
 
 # Requirements.
+
+Update/upgrade your environment.
+```console
+sudo apt install
+sudo apt upgrade -y
+
+pip install --upgrade pip
+```
+
 Follow this.
 https://github.com/huggingface/distil-whisper/tree/main/training#requirements
 
