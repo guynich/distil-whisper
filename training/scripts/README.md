@@ -6,6 +6,13 @@ https://github.com/huggingface/distil-whisper/tree/main/training
 This README documents selected information for follow the above example.
 Adapted for running on A10 with 22GB RAM.
 
+- [Distil-whisper training stages.](#distil-whisper-training-stages)
+- [Requirements.](#requirements)
+- [1. Pseudo-Labelling](#1-pseudo-labelling)
+- [2. Initialization.](#2-initialization)
+- [3. Training.](#3-training)
+  - [Training error.](#training-error)
+
 # Requirements.
 Follow this.
 https://github.com/huggingface/distil-whisper/tree/main/training#requirements
@@ -84,4 +91,26 @@ cd distil-whisper-large-v2-hi
 
 chmod +x ~/distil-whisper/training/scripts/run_distillation_hi_a10.sh
 ~/distil-whisper/training/scripts/run_distillation_hi_a10.sh
+```
+
+## Training error.
+
+This triggers the following ValueError.
+```console
+Traceback (most recent call last):
+  File "/home/ubuntu/distil-whisper-large-v2-hi/run_distillation.py", line 1668, in <module>
+    main()
+  File "/home/ubuntu/distil-whisper-large-v2-hi/run_distillation.py", line 829, in main
+    raw_datasets["train"] = load_multiple_datasets(
+  File "/home/ubuntu/distil-whisper-large-v2-hi/run_distillation.py", line 591, in load_multiple_datasets
+    dataset = load_dataset(
+  File "/home/ubuntu/.local/lib/python3.10/site-packages/datasets/load.py", line 2548, in load_dataset
+    builder_instance = load_dataset_builder(
+  File "/home/ubuntu/.local/lib/python3.10/site-packages/datasets/load.py", line 2257, in load_dataset_builder
+    builder_instance: DatasetBuilder = builder_cls(
+  File "/home/ubuntu/.local/lib/python3.10/site-packages/datasets/builder.py", line 371, in __init__
+    self.config, self.config_id = self._create_builder_config(
+  File "/home/ubuntu/.local/lib/python3.10/site-packages/datasets/builder.py", line 592, in _create_builder_config
+    raise ValueError(
+ValueError: BuilderConfig 'hi' not found. Available: ['default']
 ```
