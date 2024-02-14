@@ -71,4 +71,13 @@ chmod +x ~/distil-whisper/training/scripts/create_student_model_hi.sh
 ~/distil-whisper/training/scripts/create_student_model_hi.sh
 ```
 
+# 3. Training.
+https://github.com/huggingface/distil-whisper/tree/main/training#3-training
 
+```console
+cd
+cd distil-whisper-large-v2-hi
+
+chmod +x ~/distil-whisper/training/scripts/run_distillation_hi_a10.sh
+~/distil-whisper/training/scripts/run_distillation_hi_a10.sh
+```
