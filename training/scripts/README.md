@@ -12,6 +12,7 @@ Adapted for running on A10 with 22GB RAM.
 - [2. Initialization.](#2-initialization)
 - [3. Training.](#3-training)
   - [Training error.](#training-error)
+    - [Check dependencies.](#check-dependencies)
 
 # Requirements.
 Follow this.
@@ -117,3 +118,25 @@ ValueError: BuilderConfig 'hi' not found. Available: ['default']
 
 The pseudo-labelling [script](/training/scripts/run_pseudo_labelling_hi_a10.sh)
 sets dataset_config_name to "hi".
+
+### Check dependencies.
+I ran another install on a workstation with NVidia RTX 2080 Ti GPU and the
+workflow through Stage 3 training runs without `BuilderConfig` error.
+
+I see the the versions for `datasets` 2.17.0, `transformers` 4.37.2,
+`torch` 2.20, `evaluate` 0.4.1 are same on both the workstation and on the
+instance with A10 GPU.  But the `accelerate`  package version on workstation
+was 0.27.0 not 0.27.2 on instance with A10 GPU.
+
+I tried downgrading on the instance with A10 GPU.
+```console
+pip install --force-reinstall accelerate==0.27.0
+
+# Requires downgrading the folllowing.
+pip install --force-reinstall fsspec==2023.10.0
+pip install --force-reinstall numpy==1.23
+```
+
+This did not mitigate the error.
+`ValueError: BuilderConfig 'hi' not found. Available: ['default']`
+
