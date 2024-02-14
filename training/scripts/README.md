@@ -4,15 +4,18 @@ There are four stages. Read this.
 https://github.com/huggingface/distil-whisper/tree/main/training
 
 This README documents selected information for follow the above example.
-Adapted for running on A10 with 22GB RAM.
+Adapted for running on A10 GPU with 22GB RAM. I added scripts for a
+workstation with RTX 2080 Ti GPU (11GB RAM).
 
 - [Distil-whisper training stages.](#distil-whisper-training-stages)
 - [Requirements.](#requirements)
 - [1. Pseudo-Labelling](#1-pseudo-labelling)
+  - [Different workstation with RTX 2080 Ti GPU.](#different-workstation-with-rtx-2080-ti-gpu)
 - [2. Initialization.](#2-initialization)
 - [3. Training.](#3-training)
-  - [Training error.](#training-error)
+  - [Training error (on Ubuntu with A10 GPU).](#training-error-on-ubuntu-with-a10-gpu)
     - [Check dependencies.](#check-dependencies)
+  - [Training on workstation with RTX 2080 Ti GPU.](#training-on-workstation-with-rtx-2080-ti-gpu)
 
 # Requirements.
 
@@ -75,6 +78,15 @@ chmod +x ./distil-whisper/training/scripts/run_pseudo_labelling_hi_a10.sh
 ./distil-whisper/training/scripts/run_pseudo_labelling_hi_a10.sh
 ```
 
+## Different workstation with RTX 2080 Ti GPU.
+
+I provide a script for a different workstation with RTX 2080 Ti.
+```console
+cd
+chmod +x ./distil-whisper/training/scripts/run_pseudo_labelling_hi_rtx2080ti.sh
+./distil-whisper/training/scripts/run_pseudo_labelling_hi_rtx2080ti.sh
+```
+
 # 2. Initialization.
 I used the recommended the repo name `distil-whisper-large-v2-hi`.
 https://github.com/huggingface/distil-whisper/tree/main/training#2-initialisation
@@ -95,6 +107,8 @@ chmod +x ~/distil-whisper/training/scripts/create_student_model_hi.sh
 # 3. Training.
 https://github.com/huggingface/distil-whisper/tree/main/training#3-training
 
+## Training error (on Ubuntu with A10 GPU).
+
 ```console
 cd
 cd distil-whisper-large-v2-hi
@@ -102,8 +116,6 @@ cd distil-whisper-large-v2-hi
 chmod +x ~/distil-whisper/training/scripts/run_distillation_hi_a10.sh
 ~/distil-whisper/training/scripts/run_distillation_hi_a10.sh
 ```
-
-## Training error.
 
 This `run_distillation_hi_a10.sh` script triggers the following ValueError.
 ```console
@@ -149,3 +161,15 @@ pip install --force-reinstall numpy==1.23
 This did not mitigate the error.
 `ValueError: BuilderConfig 'hi' not found. Available: ['default']`
 
+## Training on workstation with RTX 2080 Ti GPU.
+
+It has less memory than the A10 GPU in last section.  But the training script
+proceeds without `BuilderConfig` error seen above on different instance.
+
+```console
+cd
+cd distil-whisper-large-v2-hi
+
+chmod +x ~/distil-whisper/training/scripts/run_distillation_hi_rtx2080ti.sh
+~/distil-whisper/training/scripts/run_distillation_hi_rtx2080ti.sh
+```
