@@ -1,12 +1,13 @@
 # Distil-whisper training stages.
 
-Notes for running on A10 with 22GB RAM.
-
 There are four stages. Read this.
 https://github.com/huggingface/distil-whisper/tree/main/training
 
+This README documents selected information for follow the above example.
+Adapted for running on A10 with 22GB RAM.
+
 # Requirements.
-Follow this.  This section contains my notes.
+Follow this.
 https://github.com/huggingface/distil-whisper/tree/main/training#requirements
 
 Clone this repo to home and add remote.
@@ -41,12 +42,33 @@ Result.
 Pred text:  Again, small fast craft could attack and destroy a major warship.
 Environment set up successful? True
 ```
+=> OK.
 
 # 1. Pseudo-Labelling
 https://github.com/huggingface/distil-whisper/tree/main/training#1-pseudo-labelling
 
-Creates `common_voice_13_0_hi_pseudo_labelled` folder under `distil-whisper`.
+Creates `~/common_voice_13_0_hi_pseudo_labelled` folder.
 ```console
 cd
-cd distil-whisper
+chmod +x ./distil-whisper/training/scripts/run_pseudo_labelling_hi_a10.sh
+./distil-whisper/training/scripts/run_pseudo_labelling_hi_a10.sh
 ```
+
+# 2. Initialization.
+I used the recommended the repo name `distil-whisper-large-v2-hi`.
+https://github.com/huggingface/distil-whisper/tree/main/training#2-initialisation
+
+Script creates `distil-whisper-large-v2-hi/distil-large-v2-hi-init` student
+model folder.
+```console
+cd
+cd distil-whisper-large-v2-hi
+
+cp ../distil-whisper/training/create_student_model.py .
+cp ../distil-whisper/training/run_distillation.py .
+
+chmod +x ~/distil-whisper/training/scripts/create_student_model_hi.sh
+~/distil-whisper/training/scripts/create_student_model_hi.sh
+```
+
+
