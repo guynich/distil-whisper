@@ -47,6 +47,10 @@ Environment set up successful? True
 # 1. Pseudo-Labelling
 https://github.com/huggingface/distil-whisper/tree/main/training#1-pseudo-labelling
 
+I saw https://github.com/huggingface/distil-whisper/pull/76 and
+made the same change in this repo
+[code](https://github.com/guynich/distil-whisper/blob/1daaeecae324801440193b8fb57c0791e5ecdc7e/training/run_pseudo_labelling.py#L535).
+
 Creates `~/common_voice_13_0_hi_pseudo_labelled` folder.
 ```console
 cd
