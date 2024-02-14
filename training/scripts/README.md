@@ -34,7 +34,7 @@ Linked Hugging Face account.
 Run the python test.
 ```console
 cd
-python3 distil_whisper/scripts/test_working_environment.py
+python3 ./distil-whisper/training/scripts/test_working_environment.py
 ```
 Result.
 ```console
@@ -49,5 +49,4 @@ Creates `common_voice_13_0_hi_pseudo_labelled` folder under `distil-whisper`.
 ```console
 cd
 cd distil-whisper
-
 ```
