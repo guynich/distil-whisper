@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 
-# workstation warning mitigation.
-TOKENIZERS_PARALLELISM=false
+# Section 1.
+# https://github.com/huggingface/distil-whisper/tree/main/training#1-pseudo-labelling
 
-# workstation error and freeze and OOM mitigation.
-# Set dtype to float16 (not bfloat16).
-# Set preprocessing_num_workers 1 (not 16).
-# Set dataloader_num_workers 8 (not 16)
-# Set batch size to 8.
+# Run from `distil-whisper` folder.
+# Creates `common_voice_13_0_hi_pseudo_labelled` folder under `distil-whisper`.
+
+# Changes: mitigate out of memory problems on A10 with 22GB memory.
+#  --per_device_eval_batch_size 64 \
+#  --attn_type "flash_attn" \
+
 accelerate launch training/run_pseudo_labelling.py \
   --model_name_or_path "openai/whisper-large-v2" \
   --dataset_name "mozilla-foundation/common_voice_13_0" \
@@ -17,17 +19,16 @@ accelerate launch training/run_pseudo_labelling.py \
   --id_column_name "path" \
   --output_dir "./common_voice_13_0_hi_pseudo_labelled" \
   --wandb_project "distil-whisper-labelling" \
-  --per_device_eval_batch_size 8 \
-  --dtype "float16" \
-  --dataloader_num_workers 8 \
-  --preprocessing_num_workers 1 \
+  --per_device_eval_batch_size 24 \
+  --dtype "bfloat16" \
+  --dataloader_num_workers 16 \
+  --preprocessing_num_workers 16 \
   --logging_steps 500 \
   --max_label_length 128 \
   --report_to "wandb" \
   --language "hi" \
   --task "transcribe" \
   --return_timestamps \
-  --attn_type "flash_attn" \
   --streaming False \
   --generation_num_beams 1 \
   --decode_token_ids False \

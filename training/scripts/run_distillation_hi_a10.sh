@@ -1,14 +1,22 @@
 #!/usr/bin/env bash
 
-accelerate launch training/run_distillation.py \
-  --model_name_or_path "../distil-whisper-large-v2-hi/distil-large-v2-init" \
+# Stage 3.
+# https://github.com/huggingface/distil-whisper/tree/main/training#3-training
+
+# Changes for stdudent model path and A10 GPU with 22GB memory.
+#  --model_name_or_path "./distil-large-v2-init" \
+#  --per_device_train_batch_size 64 \
+#  --per_device_eval_batch_size 64 \
+
+accelerate launch run_distillation.py \
+  --model_name_or_path "./distil-large-v2-hi-init" \
   --teacher_model_name_or_path "openai/whisper-large-v2" \
-  --train_dataset_name "./common_voice_13_0_hi_pseudo_labelled+../common_voice_13_0_hi_pseudo_labelled" \
+  --train_dataset_name "../common_voice_13_0_hi_pseudo_labelled+../common_voice_13_0_hi_pseudo_labelled" \
   --train_dataset_config_name "hi+hi" \
   --train_split_name "train+validation" \
   --text_column_name "sentence+sentence" \
   --train_dataset_samples "10+5" \
-  --eval_dataset_name "./common_voice_13_0_hi_pseudo_labelled" \
+  --eval_dataset_name "../common_voice_13_0_hi_pseudo_labelled" \
   --eval_dataset_config_name "hi" \
   --eval_split_name "test" \
   --eval_text_column_name "sentence" \
@@ -21,8 +29,8 @@ accelerate launch training/run_distillation.py \
   --save_total_limit 1 \
   --max_steps 5000 \
   --wer_threshold 10 \
-  --per_device_train_batch_size 64 \
-  --per_device_eval_batch_size 64 \
+  --per_device_train_batch_size 24 \
+  --per_device_eval_batch_size 24 \
   --dataloader_num_workers 16 \
   --preprocessing_num_workers 16 \
   --ddp_timeout 7200 \
