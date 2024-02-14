@@ -114,3 +114,6 @@ Traceback (most recent call last):
     raise ValueError(
 ValueError: BuilderConfig 'hi' not found. Available: ['default']
 ```
+
+The pseudo-labelling [script](/training/scripts/run_pseudo_labelling_hi_a10.sh)
+sets dataset_config_name to "hi".
