@@ -95,7 +95,7 @@ chmod +x ~/distil-whisper/training/scripts/run_distillation_hi_a10.sh
 
 ## Training error.
 
-This triggers the following ValueError.
+This `run_distillation_hi_a10.sh` script triggers the following ValueError.
 ```console
 Traceback (most recent call last):
   File "/home/ubuntu/distil-whisper-large-v2-hi/run_distillation.py", line 1668, in <module>
