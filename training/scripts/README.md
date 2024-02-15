@@ -19,6 +19,7 @@ workstation with RTX 2080 Ti GPU (11GB RAM).
 - [4. Evaluation.](#4-evaluation)
   - [Short Form on A10 GPU.](#short-form-on-a10-gpu)
   - [Short Form on RTX 2080 Ti GPU.](#short-form-on-rtx-2080-ti-gpu)
+  - [Long Form error on A10 GPU.](#long-form-error-on-a10-gpu)
 
 # Requirements.
 
@@ -304,3 +305,24 @@ wandb: test/wer_ortho 82.77084
 Metric `test/wer` out of distribution (OOD) FLEURS test set is `66.6%` for student model trained in `float16` precision.
 
 Note the console prints two WER values: the first is for the in distribution (ID) pseudo-labelled common voice 13.0 dataset, the second above is for the OOD FLEURS test set.
+
+## Long Form error on A10 GPU.
+https://github.com/huggingface/distil-whisper/blob/main/training/README.md#long-form
+```
+The script run_long_form_eval.py can be used to evaluate the trained student model on an arbitrary number of long-form evaluation sets. Since we don't have a long-form validation set for Hindi to hand, we'll evaluate the teacher model on the TED-LIUM validation set in this English example.
+```
+
+```console
+cd
+cd distil-whisper-large-v2-hi
+
+cp ../distil-whisper/training/run_long_form_eval.py .
+
+chmod +x ~/distil-whisper/training/scripts/run_long_form_eval_en_a10.sh
+~/distil-whisper/training/scripts/run_long_form_eval_en_a10.sh
+```
+
+The given bash script `--dataset_config_name "all"` triggers an error.
+```console
+ValueError: BuilderConfig 'all' not found. Available: ['default']
+```
