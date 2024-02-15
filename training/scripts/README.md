@@ -211,7 +211,7 @@ wandb: train/learning_rate 0.0001
 wandb:          train/loss 0.73003
 wandb:          train/time 1145.25749
 ```
- Metric `eval/wer` is `41.7%`.  The `distil-whisper` README
+Metric `eval/wer` is `41.7%`.  The `distil-whisper` README
 [here](https://github.com/huggingface/distil-whisper/tree/main/training#3-training)
 saw a "final WER of 31%" for their script values.
 
@@ -235,3 +235,17 @@ Triggers following warning.
 ```console
 02/15/2024 09:07:41 - WARNING - datasets.iterable_dataset - Too many dataloader workers: 8 (max is dataset.n_shards=1). Stopping 7 dataloader workers.
 ```
+
+Here are the short form evaluation results.
+```console
+wandb: Run history:
+wandb:      test/time █▁
+wandb:       test/wer ▁█
+wandb: test/wer_ortho ▁█
+wandb:
+wandb: Run summary:
+wandb:      test/time 70.2072
+wandb:       test/wer 66.55725
+wandb: test/wer_ortho 82.77084
+```
+Metric `test/wer` is `66.6%`.
