@@ -173,3 +173,24 @@ cd distil-whisper-large-v2-hi
 chmod +x ~/distil-whisper/training/scripts/run_distillation_hi_rtx2080ti.sh
 ~/distil-whisper/training/scripts/run_distillation_hi_rtx2080ti.sh
 ```
+
+Result.
+```console
+wandb: Run summary:
+wandb:        eval/ce_loss 1.4156
+wandb:          eval/epoch 2
+wandb:        eval/kl_loss 1.28667
+wandb:           eval/loss 2.41915
+wandb:           eval/time 1470.33953
+wandb:            eval/wer 41.70491
+wandb:      eval/wer_ortho 59.77059
+wandb:       train/ce_loss 0.49456
+wandb:         train/epoch 2
+wandb:       train/kl_loss 0.33438
+wandb: train/learning_rate 0.0001
+wandb:          train/loss 0.73003
+wandb:          train/time 1145.25749
+```
+ Metric `eval/wer` is `41.7%`.  The `distil-whisper` README
+[here](https://github.com/huggingface/distil-whisper/tree/main/training#3-training)
+saw a "final WER of 31%" for their script values.
