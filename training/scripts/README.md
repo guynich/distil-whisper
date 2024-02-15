@@ -16,6 +16,8 @@ workstation with RTX 2080 Ti GPU (11GB RAM).
   - [Training error (on Ubuntu with A10 GPU).](#training-error-on-ubuntu-with-a10-gpu)
     - [Check dependencies.](#check-dependencies)
   - [Training on workstation with RTX 2080 Ti GPU.](#training-on-workstation-with-rtx-2080-ti-gpu)
+- [4. Evaluation.](#4-evaluation)
+  - [Short Form.](#short-form)
 
 # Requirements.
 
@@ -194,3 +196,17 @@ wandb:          train/time 1145.25749
  Metric `eval/wer` is `41.7%`.  The `distil-whisper` README
 [here](https://github.com/huggingface/distil-whisper/tree/main/training#3-training)
 saw a "final WER of 31%" for their script values.
+
+# 4. Evaluation.
+
+https://github.com/huggingface/distil-whisper/blob/main/training/README.md#4-evaluation
+
+## Short Form.
+
+```console
+cd
+cd distil-whisper-large-v2-hi
+
+chmod +x ~/distil-whisper/training/scripts/run_short_form_eval_hi_rtx2080ti.sh
+~/distil-whisper/training/scripts/run_short_form_eval_hi_rtx2080ti.sh
+``
