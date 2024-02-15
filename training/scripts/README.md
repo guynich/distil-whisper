@@ -4,7 +4,7 @@ There are four stages. Read this.
 https://github.com/huggingface/distil-whisper/tree/main/training
 
 This README documents selected information for follow the above example.
-Adapted for running on A10 GPU with 22GB RAM. I added scripts for a
+Adapted for running on A10 GPU with 23GB RAM. I added scripts for a
 workstation with RTX 2080 Ti GPU (11GB RAM).
 
 - [Distil-whisper training stages.](#distil-whisper-training-stages)
@@ -17,7 +17,8 @@ workstation with RTX 2080 Ti GPU (11GB RAM).
     - [Check dependencies.](#check-dependencies)
   - [Training on workstation with RTX 2080 Ti GPU.](#training-on-workstation-with-rtx-2080-ti-gpu)
 - [4. Evaluation.](#4-evaluation)
-  - [Short Form on RTX 2080 Ti.](#short-form-on-rtx-2080-ti)
+  - [Short Form on A10 GPU.](#short-form-on-a10-gpu)
+  - [Short Form on RTX 2080 Ti GPU.](#short-form-on-rtx-2080-ti-gpu)
 
 # Requirements.
 
@@ -239,7 +240,37 @@ saw a "final WER of 31%" for their script values.
 
 https://github.com/huggingface/distil-whisper/blob/main/training/README.md#4-evaluation
 
-## Short Form on RTX 2080 Ti.
+## Short Form on A10 GPU.
+
+```console
+cd
+cd distil-whisper-large-v2-hi
+
+cp ../distil-whisper/training/run_short_form_eval.py .
+
+chmod +x ~/distil-whisper/training/scripts/run_short_form_eval_hi_a10.sh
+~/distil-whisper/training/scripts/run_short_form_eval_hi_a10.sh
+```
+Triggered this warning.
+```console
+Evaluating common_voice_13_0_hi_pseudo_labelled/test...: 0it [00:00, ?it/s]Too many dataloader workers: 16 (max is dataset.n_shards=1). Stopping 15 dataloader workers.
+02/15/2024 21:49:37 - WARNING - datasets.iterable_dataset - Too many dataloader workers: 16 (max is dataset.n_shards=1). Stopping 15 dataloader workers.
+```
+
+```console
+wandb: Run history:
+wandb:      test/time █▁
+wandb:       test/wer ▁█
+wandb: test/wer_ortho ▁█
+wandb:
+wandb: Run summary:
+wandb:      test/time 37.77144
+wandb:       test/wer 56.91455
+wandb: test/wer_ortho 71.35688
+```
+Metric `test/wer` on out of distribution (OOD) FLEURS test set is `56.9%` for student model trained in `bfloat16` precision.
+
+## Short Form on RTX 2080 Ti GPU.
 
 ```console
 cd
@@ -268,4 +299,4 @@ wandb:      test/time 70.2072
 wandb:       test/wer 66.55725
 wandb: test/wer_ortho 82.77084
 ```
-Metric `test/wer` is `66.6%`.
+Metric `test/wer` out of distribution (OOD) FLEURS test set is `66.6%` for student model trained in `float16` precision.
