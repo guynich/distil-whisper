@@ -270,6 +270,8 @@ wandb: test/wer_ortho 71.35688
 ```
 Metric `test/wer` on out of distribution (OOD) FLEURS test set is `56.9%` for student model trained in `bfloat16` precision.
 
+Note the console prints two WER values: the first `27.0` is for the in distribution (ID) pseudo-labelled common voice 13.0 dataset, the second above is for the OOD FLEURS test set.
+
 ## Short Form on RTX 2080 Ti GPU.
 
 ```console
@@ -300,3 +302,5 @@ wandb:       test/wer 66.55725
 wandb: test/wer_ortho 82.77084
 ```
 Metric `test/wer` out of distribution (OOD) FLEURS test set is `66.6%` for student model trained in `float16` precision.
+
+Note the console prints two WER values: the first is for the in distribution (ID) pseudo-labelled common voice 13.0 dataset, the second above is for the OOD FLEURS test set.
