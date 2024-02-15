@@ -2,8 +2,8 @@
 
 # Changes: mitigate out of memory problems on A10 with 22GB memory.
 #  --per_device_eval_batch_size 64 \
-#  --attn_type "flash_attn" \
 
+# TODO try without `--attn_type`.
 accelerate launch distil-whisper/training/run_pseudo_labelling.py \
   --model_name_or_path "openai/whisper-large-v2" \
   --dataset_name "mozilla-foundation/common_voice_13_0" \
@@ -23,6 +23,7 @@ accelerate launch distil-whisper/training/run_pseudo_labelling.py \
   --language "hi" \
   --task "transcribe" \
   --return_timestamps \
+  --attn_type "flash_attn" \
   --streaming False \
   --generation_num_beams 1 \
   --decode_token_ids False \
