@@ -207,6 +207,8 @@ https://github.com/huggingface/distil-whisper/blob/main/training/README.md#4-eva
 cd
 cd distil-whisper-large-v2-hi
 
+cp ../distil-whisper/training/run_short_form_eval.py .
+
 chmod +x ~/distil-whisper/training/scripts/run_short_form_eval_hi_rtx2080ti.sh
 ~/distil-whisper/training/scripts/run_short_form_eval_hi_rtx2080ti.sh
-``
+```
