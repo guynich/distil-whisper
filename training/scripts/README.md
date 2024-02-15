@@ -181,6 +181,26 @@ But then the error is not seen after rerunning the pseudo-labelling
 
 => Training script now runs.
 
+```console
+wandb: Run summary:
+wandb:        eval/ce_loss 1.27944
+wandb:          eval/epoch 18
+wandb:        eval/kl_loss 1.11462
+wandb:           eval/loss 2.13817
+wandb:           eval/time 1114.91925
+wandb:            eval/wer 28.6298
+wandb:      eval/wer_ortho 46.51952
+wandb:       train/ce_loss 0.09619
+wandb:         train/epoch 18
+wandb:       train/kl_loss 0.19989
+wandb: train/learning_rate 0.0001
+wandb:          train/loss 0.27684
+wandb:          train/time 3372.43
+```
+Metric `eval/wer` is `28.6%`.  The `distil-whisper` README
+[here](https://github.com/huggingface/distil-whisper/tree/main/training#3-training)
+saw a "final WER of 31%" for their script values.
+
 ## Training on workstation with RTX 2080 Ti GPU.
 
 It has less memory than the A10 GPU in last section.  But the training script
@@ -211,7 +231,7 @@ wandb: train/learning_rate 0.0001
 wandb:          train/loss 0.73003
 wandb:          train/time 1145.25749
 ```
-Metric `eval/wer` is `41.7%`.  The `distil-whisper` README
+Metric `eval/wer` is `41.7%` usingf float16.  The `distil-whisper` README
 [here](https://github.com/huggingface/distil-whisper/tree/main/training#3-training)
 saw a "final WER of 31%" for their script values.
 
