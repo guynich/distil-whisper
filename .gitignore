@@ -1,4 +1,4 @@
-# Ignore these.
+# Ignore these subfolders of distil-whisper.
 common_voice_13_0_hi_pseudo_labelled/
-distil_whisper/
+distil-whisper/
 wandb/
