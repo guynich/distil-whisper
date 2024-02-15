@@ -8,6 +8,7 @@
 #  --per_device_train_batch_size 64 \
 #  --per_device_eval_batch_size 64 \
 
+# TODO try batch_size of 16.
 accelerate launch run_distillation.py \
   --model_name_or_path "./distil-large-v2-hi-init" \
   --teacher_model_name_or_path "openai/whisper-large-v2" \
@@ -29,8 +30,8 @@ accelerate launch run_distillation.py \
   --save_total_limit 1 \
   --max_steps 5000 \
   --wer_threshold 10 \
-  --per_device_train_batch_size 24 \
-  --per_device_eval_batch_size 24 \
+  --per_device_train_batch_size 8 \
+  --per_device_eval_batch_size 8 \
   --dataloader_num_workers 16 \
   --preprocessing_num_workers 16 \
   --ddp_timeout 7200 \
