@@ -16,6 +16,8 @@ workstation with RTX 2080 Ti GPU (11GB RAM).
   - [Training error (on Ubuntu with A10 GPU).](#training-error-on-ubuntu-with-a10-gpu)
     - [Check dependencies.](#check-dependencies)
   - [Training on workstation with RTX 2080 Ti GPU.](#training-on-workstation-with-rtx-2080-ti-gpu)
+- [4. Evaluation.](#4-evaluation)
+  - [Short Form on RTX 2080 Ti.](#short-form-on-rtx-2080-ti)
 
 # Requirements.
 
@@ -144,12 +146,26 @@ sets dataset_config_name to "hi".
 I ran another install on a workstation with NVidia RTX 2080 Ti GPU and the
 workflow through Stage 3 training runs without `BuilderConfig` error.
 
-I see the the versions for `datasets` 2.17.0, `transformers` 4.37.2,
-`torch` 2.2.0, `evaluate` 0.4.1 are same on both the workstation and on the
-instance with A10 GPU.  But the `accelerate`  package version on workstation
-was 0.27.0 not 0.27.2 on instance with A10 GPU.
+First I checked the environment on instance with A10 GPU.
+```console
+sudo apt install
+sudo apt upgrade -y
 
-I tried downgrading on the instance with A10 GPU.
+sudo reboot
+
+pip install --upgrade pip
+
+cd distil-whisper/training
+pip install --upgrade -r requirements.txt
+cd
+```
+
+Second I inspected versions for `datasets` 2.17.0, `transformers` 4.37.2,
+`torch` 2.2.0, `evaluate` 0.4.1 are same on both the RTX 2080 Ti workstation and
+on the instance with A10 GPU.  But the `accelerate`  package version on
+workstation was 0.27.0 not 0.27.2 on instance with A10 GPU.
+
+I downgrading `accelerate` on the instance with A10 GPU.
 ```console
 pip install --force-reinstall accelerate==0.27.0
 
@@ -158,8 +174,12 @@ pip install --force-reinstall fsspec==2023.10.0
 pip install --force-reinstall numpy==1.23
 ```
 
-This did not mitigate the error.
+Initially this did not mitigate the error triggered by training script.
 `ValueError: BuilderConfig 'hi' not found. Available: ['default']`
+But then the error is not seen after rerunning the pseudo-labelling
+[script](#1-pseudo-labelling).
+
+=> Training script now runs.
 
 ## Training on workstation with RTX 2080 Ti GPU.
 
@@ -191,6 +211,41 @@ wandb: train/learning_rate 0.0001
 wandb:          train/loss 0.73003
 wandb:          train/time 1145.25749
 ```
- Metric `eval/wer` is `41.7%`.  The `distil-whisper` README
+Metric `eval/wer` is `41.7%`.  The `distil-whisper` README
 [here](https://github.com/huggingface/distil-whisper/tree/main/training#3-training)
 saw a "final WER of 31%" for their script values.
+
+# 4. Evaluation.
+
+https://github.com/huggingface/distil-whisper/blob/main/training/README.md#4-evaluation
+
+## Short Form on RTX 2080 Ti.
+
+```console
+cd
+cd distil-whisper-large-v2-hi
+
+cp ../distil-whisper/training/run_short_form_eval.py .
+
+chmod +x ~/distil-whisper/training/scripts/run_short_form_eval_hi_rtx2080ti.sh
+~/distil-whisper/training/scripts/run_short_form_eval_hi_rtx2080ti.sh
+```
+
+Triggers following warning.
+```console
+02/15/2024 09:07:41 - WARNING - datasets.iterable_dataset - Too many dataloader workers: 8 (max is dataset.n_shards=1). Stopping 7 dataloader workers.
+```
+
+Here are the short form evaluation results.
+```console
+wandb: Run history:
+wandb:      test/time █▁
+wandb:       test/wer ▁█
+wandb: test/wer_ortho ▁█
+wandb:
+wandb: Run summary:
+wandb:      test/time 70.2072
+wandb:       test/wer 66.55725
+wandb: test/wer_ortho 82.77084
+```
+Metric `test/wer` is `66.6%`.
