@@ -373,7 +373,7 @@ wandb: ️⚡ View job at https://wandb.ai/guynich/distil-whisper/jobs/QXJ0aWZhY
 wandb: Synced 5 W&B file(s), 2 media file(s), 4 artifact file(s) and 0 other file(s)
 wandb: Find logs at: ./wandb/run-20240216_195402-00h16eub/logs
 ```
-This WER is ~ 5% higher (relative) than model card.
+This WER is ~ 5% higher (relative) than HF model card.
 
 ### Open AI small model.
 
@@ -393,4 +393,16 @@ tmux  # Optional.
 ./scripts/run_short_form_eval_en_librispeech_small.sh
 ```
 
-TODO: result
+Result.
+```console
+wandb: Run summary:
+wandb:      eval/time 294.65443
+wandb:       eval/wer 4.06815
+wandb: eval/wer_ortho 98.83787
+wandb:
+wandb: 🚀 View run glistening-fuse-18 at: https://wandb.ai/guynich/distil-whisper/runs/dwdrjxaf
+wandb: ️⚡ View job at https://wandb.ai/guynich/distil-whisper/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjE0MDMxNDk0NQ==/version_details/v2
+wandb: Synced 5 W&B file(s), 2 media file(s), 4 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240216_202745-dwdrjxaf/logs
+```
+This WER is ~ 18% higher (relative) than HF model card.
