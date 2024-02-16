@@ -23,7 +23,7 @@ workstation with RTX 2080 Ti GPU (11GB RAM).
 - [Other.](#other)
   - [Librispeech clean test English.](#librispeech-clean-test-english)
     - [Open AI Large-v2 model.](#open-ai-large-v2-model)
-    - [Open AI small model.](#open-ai-small-model)
+    - [Open AI Small model.](#open-ai-small-model)
 
 # Requirements.
 
@@ -342,7 +342,7 @@ Miscellaneous.
 Large-v2 model card https://huggingface.co/openai/whisper-large-v2#evaluation
 WER 3.0%.
 
-Evaluate Whisper Large-v2 model in float32 precision, batch size set to 16 to
+Evaluate Whisper model in float32 precision, batch size set to 16 to
 mitigate out of memory on A10 GPU.
 ```console
 cd
@@ -375,12 +375,12 @@ wandb: Find logs at: ./wandb/run-20240216_195402-00h16eub/logs
 ```
 This WER is ~ 5% higher (relative) than HF model card.
 
-### Open AI small model.
+### Open AI Small model.
 
 Small model card https://huggingface.co/openai/whisper-small#evaluation
 WER 3.4%.
 
-Evaluate Whisper Large-v2 model in float32 precision, batch size set to 16 to
+Evaluate Whisper model in float32 precision, batch size set to 16 to
 mitigate out of memory on A10 GPU.
 ```console
 cd
