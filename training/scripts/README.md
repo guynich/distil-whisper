@@ -20,6 +20,8 @@ workstation with RTX 2080 Ti GPU (11GB RAM).
   - [Short Form on A10 GPU.](#short-form-on-a10-gpu)
   - [Short Form on RTX 2080 Ti GPU.](#short-form-on-rtx-2080-ti-gpu)
   - [Long Form error on A10 GPU.](#long-form-error-on-a10-gpu)
+- [Other.](#other)
+  - [Librispeech clean test in English.](#librispeech-clean-test-in-english)
 
 # Requirements.
 
@@ -325,4 +327,23 @@ chmod +x ~/distil-whisper/training/scripts/run_long_form_eval_en_a10.sh
 The given bash script `--dataset_config_name "all"` triggers an error.
 ```console
 ValueError: BuilderConfig 'all' not found. Available: ['default']
+```
+
+# Other.
+
+Adapted scripts.
+
+## Librispeech clean test in English.
+
+Large-v2 model card https://huggingface.co/openai/whisper-large-v2#evaluation
+WER 3.0%.
+
+Evaluate Whisper Large-v2 model in float32 precision.
+```console
+cd
+cd distil-whisper/training
+
+chmod +x scripts/run_short_form_eval_en_librispeech.sh
+
+./run_short_form_eval_en_librispeech.sh
 ```
