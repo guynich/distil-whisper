@@ -22,6 +22,8 @@ workstation with RTX 2080 Ti GPU (11GB RAM).
   - [Long Form error on A10 GPU.](#long-form-error-on-a10-gpu)
 - [Other.](#other)
   - [Librispeech clean test English.](#librispeech-clean-test-english)
+    - [Open AI Large-v2 model.](#open-ai-large-v2-model)
+    - [Open AI small model.](#open-ai-small-model)
 
 # Requirements.
 
@@ -335,6 +337,8 @@ Miscellaneous.
 
 ## Librispeech clean test English.
 
+### Open AI Large-v2 model.
+
 Large-v2 model card https://huggingface.co/openai/whisper-large-v2#evaluation
 WER 3.0%.
 
@@ -344,11 +348,11 @@ mitigate out of memory on A10 GPU.
 cd
 cd distil-whisper/training
 
-chmod +x scripts/run_short_form_eval_en_librispeech.sh
+chmod +x scripts/run_short_form_eval_en_librispeech_large_v2.sh
 
 tmux  # Optional.
 
-./scripts/run_short_form_eval_en_librispeech.sh
+./scripts/run_short_form_eval_en_librispeech_large_v2.sh
 ```
 
 Runnning in `tmux`.
@@ -357,3 +361,36 @@ Runnning in `tmux`.
 * Run 2: streaming after 35 iterations `ConnectionError: Server Disconnected`.
 * Run 3: not streaming.  Warning message Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false).
 
+Result.
+```console
+wandb: Run summary:
+wandb:      eval/time 1466.2758
+wandb:       eval/wer 3.1683
+wandb: eval/wer_ortho 98.80554
+wandb:
+wandb: 🚀 View run dazzling-noodles-17 at: https://wandb.ai/guynich/distil-whisper/runs/00h16eub
+wandb: ️⚡ View job at https://wandb.ai/guynich/distil-whisper/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjE0MDMxNDk0NQ==/version_details/v1
+wandb: Synced 5 W&B file(s), 2 media file(s), 4 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240216_195402-00h16eub/logs
+```
+This WER is ~ 5% higher (relative) than model card.
+
+### Open AI small model.
+
+Small model card https://huggingface.co/openai/whisper-small#evaluation
+WER 3.4%.
+
+Evaluate Whisper Large-v2 model in float32 precision, batch size set to 16 to
+mitigate out of memory on A10 GPU.
+```console
+cd
+cd distil-whisper/training
+
+chmod +x scripts/run_short_form_eval_en_librispeech_small.sh
+
+tmux  # Optional.
+
+./scripts/run_short_form_eval_en_librispeech_small.sh
+```
+
+TODO: result
