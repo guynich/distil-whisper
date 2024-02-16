@@ -6,8 +6,9 @@
 # Mitigate out of memory on A10 GPU (23GB).
 #  --per_device_eval_batch_size 64 \
 
-# Mitigate `ConnectionError: Server Disconnected`.
+# Mitigate `ConnectionError: Server Disconnected` and disable parallelism warning message.
 #  --streaming
+TOKENIZERS_PARALLELISM=false
 
 accelerate launch run_short_form_eval.py \
   --model_name_or_path "openai/whisper-large-v2" \

@@ -353,6 +353,7 @@ tmux  # Optional.
 
 Runnning in `tmux`.
 * warning `02/16/2024 18:45:46 - WARNING - datasets.iterable_dataset - Too many dataloader workers: 16 (max is dataset.n_shards=1). Stopping 15 dataloader workers.`
-* Run 1: After 35 iterations `ConnectionError: Server Disconnected`.
-* Run 2: After 35 iterations `ConnectionError: Server Disconnected`.
-* Run 3: not streaming.
+* Run 1: streaming after 35 iterations `ConnectionError: Server Disconnected`.
+* Run 2: streaming after 35 iterations `ConnectionError: Server Disconnected`.
+* Run 3: not streaming.  Warning message Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false).
+
