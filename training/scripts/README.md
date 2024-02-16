@@ -345,5 +345,5 @@ cd distil-whisper/training
 
 chmod +x scripts/run_short_form_eval_en_librispeech.sh
 
-./run_short_form_eval_en_librispeech.sh
+./scripts/run_short_form_eval_en_librispeech.sh
 ```
