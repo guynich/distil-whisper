@@ -6,6 +6,9 @@
 # Mitigate out of memory on A10 GPU (23GB).
 #  --per_device_eval_batch_size 64 \
 
+# Mitigate `ConnectionError: Server Disconnected`.
+#  --streaming
+
 accelerate launch run_short_form_eval.py \
   --model_name_or_path "openai/whisper-large-v2" \
   --dataset_name "librispeech_asr" \
@@ -19,5 +22,4 @@ accelerate launch run_short_form_eval.py \
   --report_to "wandb" \
   --generation_max_length 128 \
   --language "en" \
-  --attn_type "flash_attn" \
-  --streaming
+  --attn_type "flash_attn"

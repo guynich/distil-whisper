@@ -21,7 +21,7 @@ workstation with RTX 2080 Ti GPU (11GB RAM).
   - [Short Form on RTX 2080 Ti GPU.](#short-form-on-rtx-2080-ti-gpu)
   - [Long Form error on A10 GPU.](#long-form-error-on-a10-gpu)
 - [Other.](#other)
-  - [Librispeech clean test in English.](#librispeech-clean-test-in-english)
+  - [Librispeech clean test English.](#librispeech-clean-test-english)
 
 # Requirements.
 
@@ -331,19 +331,28 @@ ValueError: BuilderConfig 'all' not found. Available: ['default']
 
 # Other.
 
-Adapted scripts.
+Miscellaneous.
 
-## Librispeech clean test in English.
+## Librispeech clean test English.
 
 Large-v2 model card https://huggingface.co/openai/whisper-large-v2#evaluation
 WER 3.0%.
 
-Evaluate Whisper Large-v2 model in float32 precision.
+Evaluate Whisper Large-v2 model in float32 precision, batch size set to 16 to
+mitigate out of memory on A10 GPU.
 ```console
 cd
 cd distil-whisper/training
 
 chmod +x scripts/run_short_form_eval_en_librispeech.sh
 
+tmux  # Optional.
+
 ./scripts/run_short_form_eval_en_librispeech.sh
 ```
+
+Runnning in `tmux`.
+* warning `02/16/2024 18:45:46 - WARNING - datasets.iterable_dataset - Too many dataloader workers: 16 (max is dataset.n_shards=1). Stopping 15 dataloader workers.`
+* Run 1: After 35 iterations `ConnectionError: Server Disconnected`.
+* Run 2: After 35 iterations `ConnectionError: Server Disconnected`.
+* Run 3: not streaming.
