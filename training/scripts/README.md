@@ -340,10 +340,14 @@ Miscellaneous.
 ### Open AI Large-v2 model.
 
 Large-v2 model card https://huggingface.co/openai/whisper-large-v2#evaluation
-WER 3.0%.
+WER 3.000%.
 
-Evaluate Whisper model in float32 precision, batch size set to 16 to
-mitigate out of memory on A10 GPU.
+Evaluate Whisper model on A10 GPU.
+* float32 precision.
+* batch size set to 16 to mitigate out of memory.
+* flag `--language` is not set (if set `--language "en"` WER is 3.1683 %).
+* flag `-streaming` is not set (if set `--streaming` server disconnection seen after 35 iterations).
+* environment variable TOKENIZERS_PARALLELISM=false to mitigate warning message.
 ```console
 cd
 cd distil-whisper/training
@@ -355,33 +359,28 @@ tmux  # Optional.
 ./scripts/run_short_form_eval_en_librispeech_large_v2.sh
 ```
 
-Runnning in `tmux`.
-* warning `02/16/2024 18:45:46 - WARNING - datasets.iterable_dataset - Too many dataloader workers: 16 (max is dataset.n_shards=1). Stopping 15 dataloader workers.`
-* Run 1: streaming after 35 iterations `ConnectionError: Server Disconnected`.
-* Run 2: streaming after 35 iterations `ConnectionError: Server Disconnected`.
-* Run 3: not streaming.  Warning message Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false).
+Warning `02/16/2024 18:45:46 - WARNING - datasets.iterable_dataset - Too many dataloader workers: 16 (max is dataset.n_shards=1). Stopping 15 dataloader workers.`.
 
 Result.
 ```console
 wandb: Run summary:
-wandb:      eval/time 1466.2758
-wandb:       eval/wer 3.1683
+wandb:      eval/time 1466.08443
+wandb:       eval/wer 2.5685
 wandb: eval/wer_ortho 98.80554
-wandb:
-wandb: 🚀 View run dazzling-noodles-17 at: https://wandb.ai/guynich/distil-whisper/runs/00h16eub
-wandb: ️⚡ View job at https://wandb.ai/guynich/distil-whisper/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjE0MDMxNDk0NQ==/version_details/v1
-wandb: Synced 5 W&B file(s), 2 media file(s), 4 artifact file(s) and 0 other file(s)
-wandb: Find logs at: ./wandb/run-20240216_195402-00h16eub/logs
 ```
-This WER is ~ 5% higher (relative) than HF model card.
+This value `eval/wer` is lower than the HuggingFace model card WER value 3.0%.
 
 ### Open AI Small model.
 
 Small model card https://huggingface.co/openai/whisper-small#evaluation
-WER 3.4%.
+WER 3.432%.
 
-Evaluate Whisper model in float32 precision, batch size set to 16 to
-mitigate out of memory on A10 GPU.
+Evaluate Whisper model on A10 GPU.
+* float32 precision.
+* batch size set to 16 to mitigate out of memory.
+* flag `--language` is not set (if set `--language "en"` WER is 4.06815 %).
+* flag `-streaming` is not set (if set `--streaming` server disconnection seen after 35 iterations).
+* environment variable TOKENIZERS_PARALLELISM=false to mitigate warning message.
 ```console
 cd
 cd distil-whisper/training
@@ -396,13 +395,7 @@ tmux  # Optional.
 Result.
 ```console
 wandb: Run summary:
-wandb:      eval/time 294.65443
-wandb:       eval/wer 4.06815
+wandb:      eval/time 297.52911
+wandb:       eval/wer 3.44541
 wandb: eval/wer_ortho 98.83787
-wandb:
-wandb: 🚀 View run glistening-fuse-18 at: https://wandb.ai/guynich/distil-whisper/runs/dwdrjxaf
-wandb: ️⚡ View job at https://wandb.ai/guynich/distil-whisper/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjE0MDMxNDk0NQ==/version_details/v2
-wandb: Synced 5 W&B file(s), 2 media file(s), 4 artifact file(s) and 0 other file(s)
-wandb: Find logs at: ./wandb/run-20240216_202745-dwdrjxaf/logs
 ```
-This WER is ~ 18% higher (relative) than HF model card.
