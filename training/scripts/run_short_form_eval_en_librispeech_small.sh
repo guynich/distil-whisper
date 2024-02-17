@@ -9,6 +9,9 @@
 # Mitigate `ConnectionError: Server Disconnected` on Lambdalabs instance.
 #  --streaming
 
+# WER 4.06815 %.
+#   --language "en" \
+
 # Mitigate tokenizer parallelism warning message.
 TOKENIZERS_PARALLELISM=false
 
@@ -24,5 +27,4 @@ accelerate launch run_short_form_eval.py \
   --dataloader_num_workers 16 \
   --report_to "wandb" \
   --generation_max_length 128 \
-  --language "en" \
   --attn_type "flash_attn"
