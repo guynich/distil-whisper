@@ -9,7 +9,7 @@
 # Mitigate `ConnectionError: Server Disconnected` on Lambdalabs instance.
 #  --streaming
 
-# WER 4.06815 %.
+# WER 4.06815 % is higher than without the language option.
 #   --language "en" \
 
 # Mitigate tokenizer parallelism warning message.
