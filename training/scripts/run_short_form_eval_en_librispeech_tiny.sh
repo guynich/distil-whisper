@@ -9,6 +9,7 @@
 # Mitigate `ConnectionError: Server Disconnected` on Lambdalabs instance.
 #  --streaming
 
+# Not recommended with English speech recognition.
 # WER 8.23607 % is higher than without the language option.
 #   --language "en" \
 

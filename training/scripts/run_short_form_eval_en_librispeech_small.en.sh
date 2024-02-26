@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Adapted for Librispeech clean test with OpenAI Whisper Large-v2 in float32.
-# Compare https://huggingface.co/openai/whisper-large-v2#evaluation WER 3.0%.
+# Adapted for Librispeech clean test with OpenAI Whisper Small.en in float32.
+# Compare https://huggingface.co/openai/whisper-small.en#evaluation WER 3.053161596922323%.
 
 # Mitigate out of memory on A10 GPU (23GB).
 #  --per_device_eval_batch_size 64 \
@@ -10,14 +10,13 @@
 #  --streaming
 
 # Not recommended with English speech recognition.
-# WER 3.1683 % is higher than without the language option.
 #   --language "en" \
 
 # Mitigate tokenizer parallelism warning message.
 TOKENIZERS_PARALLELISM=false
 
 accelerate launch run_short_form_eval.py \
-  --model_name_or_path "openai/whisper-large-v2" \
+  --model_name_or_path "openai/whisper-small.en" \
   --dataset_name "librispeech_asr" \
   --dataset_config_name "clean" \
   --dataset_split_name "test" \
